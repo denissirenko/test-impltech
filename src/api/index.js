@@ -8,5 +8,19 @@ export const api = Object.freeze({
                 method: 'GET',
             })
         }
+    },
+    planets: {
+        fetch: ()=>{
+            return fetch(`${root}/planets`, {
+                method: 'GET',
+            })
+        }
+    },
+    starships: {
+        fetch: ()=>{
+            return fetch(`${root}/sratships`, {
+                method: 'GET',
+            })
+        }
     }
 })

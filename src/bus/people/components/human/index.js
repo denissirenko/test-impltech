@@ -1,16 +1,21 @@
 import { useComment } from './hooks/useComment';
+import { useState } from 'react';
 
 
 export const Human = ({ name, birth_year }) => {
-    
-    const { commentText, comment, inputChange, addComment} = useComment();    
+    const { commentText, comments, inputChange, addComment, removeComment} = useComment();  
 
-    const commentJSX = comment && (
-        <div>
-            <p>Comment:</p>
-            <p>{commentText}</p>
-        </div>
-    );
+    const [like, setLike] = useState(true)
+
+
+    const commentJSX = comments && comments.length !== 0 && comments.map((el, index) => {
+        return (
+            <div key={index}>
+                {el}
+                <button onClick={ () => removeComment(index) }>x</button>
+            </div>
+        );
+    });
 
     return (
         <>
@@ -26,6 +31,7 @@ export const Human = ({ name, birth_year }) => {
                 >comment</button>
             </div>
             {commentJSX}
+            <div onClick={() => setLike(prevValue => !prevValue)} style={{width: 10, height: 10, backgroundColor: like ? 'red' : 'blue'}}></div>
         </>
     )
 }
